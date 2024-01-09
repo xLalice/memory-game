@@ -1,6 +1,8 @@
+import images from "./imageImporter"
+
 export default function Card(props){
     return (
-        <div class="card">
+        <div className="card">
             <img src={`./assets/characters/${props.name}.jpg`}/>
             <h1>{props.name}</h1>
         </div>
