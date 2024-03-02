@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import logo from "./assets/logo.png";
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.scss';
 import Card from './Card';
+import Confetti from 'react-confetti';
+import { useWindowSize } from "@uidotdev/usehooks";
 
 function App() {
 	const [characters, setCharacters] = useState([
@@ -12,7 +13,7 @@ function App() {
 		'Saul Goodman',
 		'Gus Fring',
 		'Mike Ehrmantraut',
-		'Walter White Jr.',
+		'Walter White Jr',
 		'Jane Margolis',
 		'Tuco Salamanca',
 		'Gale Boetticher',
@@ -24,17 +25,22 @@ function App() {
 	const [score, setScore] = useState(0);
 	const [highscore, setHighscore] = useState(0);
 	const [cards, setCards] = useState([])
+	const [clickedCharacters, setClickedCharacters] = useState([]);
+	const [showConfetti, setShowConfetti] = useState(false);
+	const { width, height } = useWindowSize();
 
 	useEffect(() => {
 		shuffleCharacters()
-		initializeCards()
-	}, [])
+	}, [score]);
 
-	function initializeCards() {
-		const initialCards = characters.slice(0, 5);
-	
-		setCards(initialCards);
-	}
+	useEffect(() => {
+		if (score > highscore) {
+			setHighscore(score);
+			if (score === highscore + 1) {
+				setShowConfetti(true);
+			}
+		}
+	}, [score, highscore]);
 
 	function shuffleCharacters() {
 		let newArray = [...characters]
@@ -43,31 +49,51 @@ function App() {
 			[newArray[i], newArray[j]] = [newArray[j], newArray[i]];
 		}
 
-		setCharacters(newArray);
+		setCards(newArray);
 	}
 
-	
+	function handleCardClick(hero){
+		if (clickedCharacters.includes(hero)) {
+			resetScore()
+		} else {
+			updateScore()
+			setClickedCharacters([...clickedCharacters, hero])
+		}
+	}
+
+	function updateScore() {
+		setScore(prevScore => prevScore + 1);
+		if (score + 1 > highscore) {
+			setHighscore(score + 1);
+		}
+	}
+
+	function resetScore(){
+		setScore(0);
+		setClickedCharacters([]);
+	}
 
 	return (
 		<>
-			<img src={logo} alt="Breaking Bad"/>
+			{showConfetti && <Confetti width={width} height={height} />}
 			<div className="counter">
+			<img className="logo" src="logo.png" alt="Breaking Bad"/>
 				<h1>Score: {score}</h1>
 				<h1>Highscore: {highscore}</h1>
 			</div>
 			<div className="container">
 				{cards.map((item, index) => {
-					return (<Card
-						key={index}
-						name={item}
-					/>	)
+					return (
+						<Card
+							key={index}
+							name={item}
+							onClick={handleCardClick}
+						/>
+					)
 				})}
 			</div>
-
-
-			
 		</>
 	)
 }
 
-export default App
+export default App;

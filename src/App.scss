@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("./background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100vw;
+}
+
+.counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: black; 
+    color: #fff;
+    width: 100vw;
+    top: 0;
+    gap: 40px;
+}
+
+.logo {
+    width: 200px;
+    height: 72px;
+    margin-right: auto;
+    margin-left: 20px;
+    
+}
+

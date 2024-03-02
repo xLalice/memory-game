@@ -1,9 +1,10 @@
-import images from "./imageImporter"
+import "./Card.scss";
 
 export default function Card(props){
+
     return (
-        <div className="card">
-            <img src={`./assets/characters/${props.name}.jpg`}/>
+        <div className="card" onClick={() => props.onClick(props.name)}>
+            <img src={`characters/${props.name}.png`}/>
             <h1>{props.name}</h1>
         </div>
     )
