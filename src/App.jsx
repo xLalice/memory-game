@@ -33,14 +33,18 @@ function App() {
 		shuffleCharacters()
 	}, [score]);
 
-	useEffect(() => {
-		if (score > highscore) {
-			setHighscore(score);
-			if (score === highscore + 1) {
-				setShowConfetti(true);
-			}
-		}
-	}, [score, highscore]);
+	// useEffect(() => {
+	// 	if (score > highscore) {
+	// 		console.log("Score: " + score);
+	// 		console.log("Highscore: " + score);
+	// 		setHighscore(score);
+	// 		if (score === highscore + 1) {
+	// 			console.log("SCORE===HIGHSCORE: " + score)
+	// 			console.log(highscore);
+	// 			setShowConfetti(true);
+	// 		}
+	// 	}
+	// }, [score, highscore]);
 
 	function shuffleCharacters() {
 		let newArray = [...characters]
@@ -63,8 +67,15 @@ function App() {
 
 	function updateScore() {
 		setScore(prevScore => prevScore + 1);
-		if (score + 1 > highscore) {
-			setHighscore(score + 1);
+		if (score >= highscore) {
+			updateHighscore();
+		}
+	}
+
+	const updateHighscore = () => {
+		setHighscore((previousHighscore) => previousHighscore + 1);
+		if (highscore >= 14) {
+			setShowConfetti(true);
 		}
 	}
 
