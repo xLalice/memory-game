@@ -89,21 +89,24 @@ function App() {
 			{showConfetti && <Confetti width={width} height={height} />}
 			<div className="counter">
 			<img className="logo" src="logo.png" alt="Breaking Bad"/>
+			<div>
 				<h1>Score: {score}</h1>
 				<h1>Highscore: {highscore}</h1>
 			</div>
-			<div className="container">
-				{cards.map((item, index) => {
-					return (
-						<Card
-							key={index}
-							name={item}
-							onClick={handleCardClick}
-						/>
-					)
-				})}
 			</div>
-		</>
+			<div className="container">
+			{cards.map((item, index) => {
+				return (
+				<Card
+					key={index}
+					name={item}
+					onClick={handleCardClick}
+				/>
+				)
+			})}
+			</div>
+			</>
+
 	)
 }
 

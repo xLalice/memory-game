@@ -5,34 +5,37 @@ body {
     background-image: url("./background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-.container {
+  }
+  
+  .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    width: 100vw;
-}
-
-.counter {
+    width: 100%;
+  }
+  
+  .counter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
     background-color: black; 
     color: #fff;
-    width: 100vw;
-    top: 0;
-    gap: 40px;
-}
-
-.logo {
+  }
+  
+  .logo {
     width: 200px;
-    height: 72px;
-    margin-right: auto;
-    margin-left: 20px;
-    
-}
-
+    height: auto; 
+    margin-bottom: 10px; 
+  }
+  
+  .counter div {
+    margin-top: 10px; /* Adding space between logo and score */
+  }
+  
+  h1 {
+    margin: 0; /* Resetting default margin for h1 */
+  }
+  
